@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <data>
+        <variable
+            name="ProfileViewModel"
+            type="cat.udl.tidic.a_favour.models.ProfileViewModel" />
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        tools:context=".Views.ProfileView"
+        tools:visibility="visible">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/up_panel"
+            android:layout_width="411dp"
+            android:layout_height="45dp"
+            android:background="@color/AfavourColor"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/back_arrow"
+            android:layout_width="35dp"
+            android:layout_height="23dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="16dp"
+            android:contentDescription="@string/back_arrow"
+            android:onClick="backArrowAction"
+            app:layout_constraintStart_toStartOf="@+id/up_panel"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/arrow" />
+
+
+        <RatingBar
+            android:id="@+id/stars"
+            style="?android:attr/ratingBarStyleIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:max="5"
+            android:rating="3.5"
+            android:scaleX="0.7"
+            android:scaleY="0.7"
+            android:theme="@style/RatingBar"
+            android:transformPivotX="0dp"
+            android:transformPivotY="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/name" />
+
+
+        <ImageView
+            android:id="@+id/edit"
+            android:layout_width="46dp"
+            android:layout_height="34dp"
+            android:layout_marginStart="348dp"
+            android:layout_marginTop="8dp"
+            android:contentDescription="@string/edit"
+            android:onClick="backArrowAction"
+            app:layout_constraintStart_toStartOf="@+id/up_panel"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/pencil" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="30dp"
+            android:background="#FFFFFF"
+            android:text="User Name"
+            android:textColor="@color/tecxtColor"
+            android:textSize="30sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/up_panel"
+            tools:text="User Name" />
+
+        <ImageView
+            android:id="@+id/profile_image"
+            android:layout_width="156dp"
+            android:layout_height="133dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="16dp"
+            android:contentDescription="@string/profileImage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/up_panel"
+            app:srcCompat="@drawable/example_person" />
+
+        <ImageView
+            android:id="@+id/favours_icon"
+            android:layout_width="34dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="10dp"
+            android:contentDescription="@string/favours"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profile_image"
+            app:srcCompat="@drawable/handshacke" />
+
+        <TextView
+            android:id="@+id/favoursInfo"
+            android:layout_width="229dp"
+            android:layout_height="29dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical"
+            android:textColor="@color/tecxtColor"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@+id/favours_icon"
+            app:layout_constraintTop_toBottomOf="@+id/profile_image"
+            tools:text="Favours Info" />
+
+        <ImageView
+            android:id="@+id/location_icon"
+            android:layout_width="23dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="20dp"
+            android:contentDescription="@string/location"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/favours_icon"
+            app:srcCompat="@drawable/location" />
+
+        <TextView
+            android:id="@+id/user_location"
+            android:layout_width="wrap_content"
+            android:layout_height="29dp"
+            android:layout_marginStart="9dp"
+            android:layout_marginTop="4dp"
+            android:gravity="center_vertical"
+            android:textColor="@color/tecxtColor"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@+id/location_icon"
+            app:layout_constraintTop_toBottomOf="@+id/favoursInfo"
+            tools:text="08700, Igualada" />
+
+        <TextView
+            android:id="@+id/show_location"
+            android:layout_width="119dp"
+            android:layout_height="29dp"
+            android:layout_marginStart="13dp"
+            android:layout_marginTop="4dp"
+            android:clickable="true"
+            android:foregroundGravity="clip_vertical"
+            android:gravity="center_vertical"
+            android:onClick="@{() -> ProfileViewModel.showLocationBtn()}"
+            android:text="@string/showLocation"
+            android:textColor="#FF3B5B"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@+id/user_location"
+            app:layout_constraintTop_toBottomOf="@+id/favoursInfo"
+            tools:text="Show location" />
+
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/main_layout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/show_location"
+            tools:context=".MainActivity"
+            tools:ignore="MissingConstraints">
+
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/appBarLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:elevation="6dp">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_alignParentTop="true"
+                    android:background="#FF3B5B"
+                    android:minHeight="?attr/actionBarSize"
+                    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                    app:elevation="0dp"
+                    app:layout_scrollFlags="scroll|enterAlways|snap"
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tab_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/toolbar"
+                    android:background="#FF3B5B"
+                    android:minHeight="?attr/actionBarSize"
+                    app:elevation="0dp"
+                    app:tabIndicatorColor="#FFFFFF"
+                    app:tabIndicatorHeight="2dp"
+                    app:tabMode="fixed"
+                    app:tabSelectedTextColor="#ffffff"
+                    app:tabTextColor="#d3d3d3" />
+
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tab_layout"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+        <RelativeLayout
+            android:id="@+id/loadingPanel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#BCFFFFFF"
+            android:backgroundTintMode="screen"
+            android:clickable="true"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="gone">
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminate="true" />
+        </RelativeLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
