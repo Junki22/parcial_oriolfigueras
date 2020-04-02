@@ -41,8 +41,31 @@ public class ProfileViewModel
     // fet anar en la línia 43 i 44,
 
 
+
     public MutableLiveData<UserModel> user = new MutableLiveData<>();
+    //EXPLICACIÓ de la MUTABLE LIVE DATA
+    //La MutableLiveData té dues funcions principals : la de postValue(valor) i la de setValue(valor).
+    //L'utilitzem ja que el LiveData no té mètodes públics per a canviar les dades guardades (coosa que necessitem fer).
+    //Un cop actualitzem el valor de "user" (que és un UserModel), salta el trigger de la LiveData
+    // i avisa a tots els observadors que l'estan observant.
+
+    //En el nostre codi, actualitzem el valor de "user" en relació al que ens ha retornat
+    //la crida GET a l'API :
+    // 1 - Si la crida ha anat bé, agafem el valor del response.body() i el posem a "usuari"
+    // 2 - Si la crida no ha anat bé, posem el valor "null" a l'usuari.
+
+    //El ProfileView (que és qui està observant), rebrà el valor de "user" i actuarà en conseqüència.
+
     public LiveData<UserModel> getUserProfile(){ return user; }
+    //EXPLICACIÓ LIVE DATA
+    //La LiveData, és una classe de dades OBSERVABLE. La diferència entre la LiveData i
+    //una classe observable regular és que la LiveData només actualitza aquells observadors de
+    //l'app que tenen un cicle de vida actiu.
+    //La classe ProfileView observa si hi ha hagut algun canvi en la LiveData (línia 131 del ProfileView)
+    //mitjançant el mètode observe().
+    //Com ja he explicat abans, el trigger de l'observador s'efectua a l'hora
+    // de fer un setValue(valor) de la MutableLiveData que està retornant.
+    //Un cop salta aquest trigger, el ProfileView actuarà en conseqüència.
 
     public ProfileViewModel()
     {
@@ -64,12 +87,12 @@ public class ProfileViewModel
        //map.put("Authorization", "656e50e154865a5dc469b80437ed2f963b8f58c8857b66c9bf");
 
        userService = RetrofitClientInstance.getRetrofitInstance().create(UserServices.class);
-       Call<Void> call = userService.getUserProfile(map);
+       Call<UserModel> call = userService.getUserProfile(map);
 
-       call.enqueue(new Callback<Void>()
+       call.enqueue(new Callback<UserModel>()
        {
            @Override
-           public void onResponse(Call<Void> call, Response<Void> response)
+           public void onResponse(Call<UserModel> call, Response<UserModel> response)
            {
                try
                {
@@ -79,7 +102,7 @@ public class ProfileViewModel
            }
 
            @Override
-           public void onFailure(Call<Void> call, Throwable t)
+           public void onFailure(Call<UserModel> call, Throwable t)
            {
 
                user.setValue(null);
